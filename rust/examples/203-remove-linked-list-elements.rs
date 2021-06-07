@@ -3,16 +3,25 @@ fn main() {
         val: 1,
         next: Some(Box::new(ListNode {
             val: 2,
-            next: Some(Box::new(ListNode { val: 2, next: Some(Box::new(ListNode {
-                val: 1,
-                next: Some(Box::new(ListNode { val: 1, next: Some(Box::new(ListNode {
-                    val: 2,
-                    next: Some(Box::new(ListNode { val: 1, next: Some(Box::new(ListNode {
-                        val: 2,
-                        next: Some(Box::new(ListNode { val: 1, next: None })),
-                    })) })),
-                })) })),
-            })) })),
+            next: Some(Box::new(ListNode {
+                val: 2,
+                next: Some(Box::new(ListNode {
+                    val: 1,
+                    next: Some(Box::new(ListNode {
+                        val: 1,
+                        next: Some(Box::new(ListNode {
+                            val: 2,
+                            next: Some(Box::new(ListNode {
+                                val: 1,
+                                next: Some(Box::new(ListNode {
+                                    val: 2,
+                                    next: Some(Box::new(ListNode { val: 1, next: None })),
+                                })),
+                            })),
+                        })),
+                    })),
+                })),
+            })),
         })),
     }));
     let mut head = remove_elements(head, 1);
@@ -26,11 +35,13 @@ fn main() {
 ///
 #[doc = "https://leetcode-cn.com/problems/remove-linked-list-elements/"]
 pub fn remove_elements(head: Option<Box<ListNode>>, val: i32) -> Option<Box<ListNode>> {
-    let mut head = Some(Box::new(ListNode { val: val + 1, next: head }));
-	let mut node = &mut head;
+    let mut head = Some(Box::new(ListNode {
+        val: val + 1,
+        next: head,
+    }));
+    let mut node = &mut head;
 
-    'OUTER:
-    while let Some(cur) = node {
+    'OUTER: while let Some(cur) = node {
         while let Some(next) = &mut cur.next {
             if next.val == val {
                 cur.next = next.next.take();
@@ -41,7 +52,7 @@ pub fn remove_elements(head: Option<Box<ListNode>>, val: i32) -> Option<Box<List
         }
         break;
     }
-    
+
     head.unwrap().next
 }
 
@@ -53,11 +64,8 @@ pub struct ListNode {
 }
 
 impl ListNode {
-  #[inline]
-  fn new(val: i32) -> Self {
-    ListNode {
-      next: None,
-      val
+    #[inline]
+    fn new(val: i32) -> Self {
+        ListNode { next: None, val }
     }
-  }
 }
