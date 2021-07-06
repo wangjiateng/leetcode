@@ -4,51 +4,24 @@ fn main() {
 
 struct Solution;
 impl Solution {
-    ///  给你一个整数 n，请你返回一个含 n 个字符的字符串，其中每种字符在该字符串中都恰好出现 奇数次 。  
-    ///
-    ///  返回的字符串必须只含小写英文字母。如果存在多个满足题目要求的字符串，则返回其中任意一个即可。
-    ///
-    ///  示例 1：
-    ///
-    ///  输入：n = 2
-    ///
-    ///  输出："xy"
-    ///
-    ///  解释："xy" 是一个满足题目要求的字符串，因为 'x' 和 'y' 各出现 1 次。当然，还有很多其他字符串也满足题目要求，比如："ag" 和 "ur"。
-    ///
-    ///  示例 3：
-    ///
-    ///  输入：n = 7
-    ///
-    ///  输出："holasss"
-    ///
-    ///  提示：
-    ///
-    ///  1 <= n <= 500
-    ///
     #[doc = "https://leetcode-cn.com/problems/generate-a-string-with-characters-that-have-odd-counts/"]
     pub fn generate_the_string(n: i32) -> String {
         let mut rt_vec: Vec<u8> = Vec::default();
         match n {
-            1 => rt_vec.push(b'a'),
-            2 => {
-                rt_vec.push(b'a');
-                rt_vec.push(b'b');
-            }
-            _ => {
-                let mut h = n | 1;
-                if h > n {
-                    h = h - 2;
-                }
-                let m = n % h;
-                for _ in 0..h {
-                    rt_vec.push(b'a');
-                }
-                if m == 1 {
-                    rt_vec.push(b'b');
-                }
-            }
+            1 => return 'a'.to_string(),
+            2 => return "ab".to_string(),
+            _ => {}
         };
+        let mut h = n | 1;
+        if h > n {
+            h = h - 2;
+        }
+        for _ in 0..h {
+            rt_vec.push(b'a');
+        }
+        if n % h == 1 {
+            rt_vec.push(b'b');
+        }
         return String::from_utf8(rt_vec).unwrap();
     }
 }
