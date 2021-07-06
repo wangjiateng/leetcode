@@ -1,7 +1,7 @@
 use core::num;
 
 fn main() {
-    println!("count: {}", Solution::find_target_sum_ways(vec![2,1], 1))
+    println!("count: {}", Solution::find_target_sum_ways(vec![2, 1], 1))
 }
 
 struct Solution;
@@ -19,14 +19,14 @@ impl Solution {
     pub fn find_target_sum_ways(nums: Vec<i32>, target: i32) -> i32 {
         if nums.len() == 1 {
             if nums[0] == target {
-                return 1
+                return 1;
             } else {
-                return 0
+                return 0;
             }
         }
         let mut rt = i32::default();
-        rt += Self::find_target_sum_ways(nums[1..].to_vec(),   nums[0] + target);
-        rt += Self::find_target_sum_ways(nums[1..].to_vec(),   nums[0] + target);
+        rt += Self::find_target_sum_ways(nums[1..].to_vec(), nums[0] + target);
+        rt += Self::find_target_sum_ways(nums[1..].to_vec(), nums[0] + target);
         rt
     }
 }
